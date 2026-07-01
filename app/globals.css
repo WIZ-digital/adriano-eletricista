@@ -1,26 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --electric-blue: #1a3a6b;
+  --electric-blue-dark: #0f2347;
+  --electric-blue-light: #2a5298;
+  --electric-yellow: #f59e0b;
+  --electric-yellow-dark: #d97706;
+  --electric-yellow-light: #fcd34d;
+  --whatsapp-green: #25d366;
+  --whatsapp-green-dark: #128c7e;
+  --gray-light: #f1f5f9;
+  --gray-mid: #e2e8f0;
+  --gray-text: #64748b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Pulse animation for WhatsApp CTA buttons ─── */
+@keyframes pulse-whatsapp {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+  }
+}
+
+@keyframes pulse-yellow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 12px rgba(245, 158, 11, 0);
+  }
+}
+
+@keyframes float-badge {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lightning-flicker {
+  0%, 90%, 100% { opacity: 1; }
+  92%, 96% { opacity: 0.4; }
+  94%, 98% { opacity: 0.9; }
+}
+
+.animate-pulse-whatsapp {
+  animation: pulse-whatsapp 2s ease-in-out infinite;
+}
+
+.animate-pulse-yellow {
+  animation: pulse-yellow 2.5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-badge 3s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-lightning {
+  animation: lightning-flicker 4s ease-in-out infinite;
+}
+
+/* ─── Hero gradient overlay ─── */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 35, 71, 0.92) 0%,
+    rgba(26, 58, 107, 0.85) 40%,
+    rgba(26, 58, 107, 0.6) 70%,
+    rgba(15, 35, 71, 0.3) 100%
+  );
+}
+
+/* ─── Section divider ─── */
+.section-divider {
+  background: linear-gradient(90deg, transparent, var(--electric-yellow), transparent);
+  height: 2px;
+  border: none;
+}
+
+/* ─── Card hover effect ─── */
+.service-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(26, 58, 107, 0.15);
+}
+
+/* ─── Star rating ─── */
+.star-filled {
+  color: var(--electric-yellow);
+}
+
+/* ─── WhatsApp FAB ─── */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  animation: pulse-whatsapp 2s ease-in-out infinite;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
 }
